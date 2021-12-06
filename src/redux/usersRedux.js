@@ -1,26 +1,26 @@
 /* selectors */
-export const getAll = ({posts}) => posts;
+export const getUsers = ({users}) => users;
 
 /* action name creator */
-const reducerName = 'posts';
-const createActionName = name => `app/${reducerName}/${name}`;
+//const reducerName = 'users';
+//const createActionName = name => `app/${reducerName}/${name}`;
 
 /* action types */
-const FETCH_START = createActionName('FETCH_START');
+/* const FETCH_START = createActionName('FETCH_START');
 const FETCH_SUCCESS = createActionName('FETCH_SUCCESS');
-const FETCH_ERROR = createActionName('FETCH_ERROR');
+const FETCH_ERROR = createActionName('FETCH_ERROR'); */
 
 /* action creators */
-export const fetchStarted = payload => ({ payload, type: FETCH_START });
+/* export const fetchStarted = payload => ({ payload, type: FETCH_START });
 export const fetchSuccess = payload => ({ payload, type: FETCH_SUCCESS });
-export const fetchError = payload => ({ payload, type: FETCH_ERROR });
+export const fetchError = payload => ({ payload, type: FETCH_ERROR }); */
 
 /* thunk creators */
 
 /* reducer */
 export const reducer = (statePart = [], action = {}) => {
   switch (action.type) {
-    case FETCH_START: {
+    /* case FETCH_START: {
       return {
         ...statePart,
         loading: {
@@ -47,7 +47,7 @@ export const reducer = (statePart = [], action = {}) => {
           error: action.payload,
         },
       };
-    }
+    } */
     default:
       return statePart;
   }

@@ -7,11 +7,17 @@ import clsx from 'clsx';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 
 import styles from './MainLayout.module.scss';
+import { Container } from '@material-ui/core';
+
+import { Header } from '../Header/Header';
 
 const Component = ({className, children}) => (
   <div className={clsx(className, styles.root)}>
-    <h2>MainLayout</h2>
-    {children}
+    {/* <h2>MainLayout</h2> */}
+    <Header />
+    <Container>
+      {children}
+    </Container>
   </div>
 );
 
