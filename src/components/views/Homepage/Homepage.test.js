@@ -4,7 +4,10 @@ import { HomepageComponent } from './Homepage';
 
 describe('Component Homepage', () => {
   it('should render without crashing', () => {
-    const component = shallow(<HomepageComponent />);
+    const posts = {
+      data: [],
+    };
+    const component = shallow(<HomepageComponent posts={posts} />);
     expect(component).toBeTruthy();
   });
 });

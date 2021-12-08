@@ -43,17 +43,20 @@ const Component = ({className, posts, users}) => {
 
   return (
     <div className={clsx(className, styles.root)}>
-      <h2>Homepage</h2>
       {posts.data.map(post => {
         return (
           <Grid key={post.id} className={classes.root}>
             <Paper className={classes.paper}>
               <Grid container spacing={2}>
-                <Grid item>
-                  <ButtonBase className={classes.image}>
-                    <img className={classes.img} alt="complex" src={post.picture} />
-                  </ButtonBase>
-                </Grid>
+                {post.picture ?
+                  <Grid item>
+                    <ButtonBase className={classes.image}>
+                      <img className={classes.img} alt="img" src={post.picture} />
+                    </ButtonBase>
+                  </Grid>
+                  :
+                  ''
+                }
                 <Grid item xs={12} sm container>
                   <Grid item xs container direction="column" spacing={2}>
                     <Grid item xs>
@@ -66,18 +69,22 @@ const Component = ({className, posts, users}) => {
                       <Typography variant="body2">
                         <Button component={Link} to={`/post/${post.id}`} color="inherit">View advert</Button>
                       </Typography>
-                      {users.isLogged ?
+                      {users.isAdmin || users.user === post.authorEmail ?
                         <Typography variant="body2">
-                          <Button component={Link} to="/post/add" color="inherit">Add new advert</Button>
+                          <Button component={Link} to="/post/add" color="inherit">Edit advert</Button>
                         </Typography>
                         :
                         ''
                       }
                     </Grid>
                   </Grid>
-                  <Grid item>
-                    <Typography variant="subtitle1">${post.price}</Typography>
-                  </Grid>
+                  {post.price ?
+                    <Grid item>
+                      <Typography variant="subtitle1">${post.price}</Typography>
+                    </Grid>
+                    :
+                    ''
+                  }
                 </Grid>
               </Grid>
             </Paper>

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 import clsx from 'clsx';
 
-// import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
+//import { connect } from 'react-redux';
+//import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 
 import styles from './{{pascalCase name}}.module.scss';
 
@@ -20,15 +20,15 @@ Component.propTypes = {
   className: PropTypes.string,
 };
 
-// const mapStateToProps = state => ({
-//   someProp: reduxSelector(state),
-// });
+/* const mapStateToProps = state => ({
+  someProp: reduxSelector(state),
+}); */
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
+/* const mapDispatchToProps = dispatch => ({
+  someAction: arg => dispatch(reduxActionCreator(arg)),
+}); */
 
-// const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
+//const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
   Component as {{pascalCase name}},

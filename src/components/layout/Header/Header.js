@@ -18,7 +18,7 @@ const Component = ({className, users}) => (
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" className={styles.title}>
-          Bulletin Board
+          <Button component={Link} to="/" color="inherit">Bulletin Board</Button>
         </Typography>
         {users.isLogged ?
           <Typography variant="h6">

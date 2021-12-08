@@ -13,7 +13,6 @@ import { Header } from '../Header/Header';
 
 const Component = ({className, children}) => (
   <div className={clsx(className, styles.root)}>
-    {/* <h2>MainLayout</h2> */}
     <Header />
     <Container>
       {children}
