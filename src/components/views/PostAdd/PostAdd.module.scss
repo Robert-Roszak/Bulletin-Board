@@ -1,4 +1,52 @@
 @import '../../../styles/settings.scss';
 
-// .root {
-// }
+.root {
+  max-width: 80%;
+  margin: 30px auto;
+  box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+  border-radius: 20px 20px 20px 20px;
+
+  .postContainer {
+    padding: 10px;
+
+    .imageWrapper {
+      .image {
+        height: 350px;
+        max-width: 100%;
+        height: auto;
+        max-height: 400px;
+        text-align: center;
+      }
+
+      .uploadButton {
+        left: 50%;
+        transform: translateX(-50%)
+      }
+    }
+
+    .contentOne {
+      flex-wrap: nowrap;
+    }
+
+    .contentTwo {
+      width: 100%;
+    }
+
+    .contact {
+      .iconWrapper {
+        position: relative;
+        left: 30px;
+        width: 100%;
+
+        .icon {
+          position: absolute;
+          left: -20px;
+          top: 33%;
+        }
+        .contactText {
+          width: calc(100% - 45px);
+        }
+      }
+    }
+  }
+}
