@@ -13,6 +13,7 @@ import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
 import PhoneAndroidRoundedIcon from '@mui/icons-material/PhoneAndroidRounded';
 import LocationCityRoundedIcon from '@mui/icons-material/LocationCityRounded';
 import { Link } from 'react-router-dom';
+import EditRoundedIcon from '@mui/icons-material/EditRounded';
 
 const Component = ({className, post, users }) => {
 
@@ -84,7 +85,7 @@ const Component = ({className, post, users }) => {
             }
             {users.isAdmin || users.user === post.authorEmail ?
               <Typography variant="body2">
-                <Button component={Link} to="/post/add" color="inherit" variant="outlined">Edit advert</Button>
+                <Button component={Link} to={`/post/${post.id}/edit`} color="primary" variant="contained" size="small" fullWidth startIcon={<EditRoundedIcon />}>Edit advert</Button>
               </Typography>
               :
               ''

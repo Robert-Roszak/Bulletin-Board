@@ -14,6 +14,8 @@ import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
+import OpenInNewRoundedIcon from '@mui/icons-material/OpenInNewRounded';
+import EditRoundedIcon from '@mui/icons-material/EditRounded';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -66,12 +68,14 @@ const Component = ({className, posts, users}) => {
                       <Typography variant="body2" gutterBottom>
                         {post.content}
                       </Typography>
-                      <Typography variant="body2">
-                        <Button component={Link} to={`/post/${post.id}`} color="inherit">View advert</Button>
+                    </Grid>
+                    <Grid item>
+                      <Typography variant="body2" gutterBottom>
+                        <Button component={Link} to={`/post/${post.id}`} color="primary" variant="contained" size="small" fullWidth startIcon={<OpenInNewRoundedIcon />}>View advert</Button>
                       </Typography>
                       {users.isAdmin || users.user === post.authorEmail ?
                         <Typography variant="body2">
-                          <Button component={Link} to="/post/add" color="inherit">Edit advert</Button>
+                          <Button component={Link} to={`/post/${post.id}/edit`} color="primary" variant="contained" size="small" fullWidth startIcon={<EditRoundedIcon />}>Edit advert</Button>
                         </Typography>
                         :
                         ''

@@ -27,7 +27,7 @@ export const initialState = {
         picture: 'https://cdn.pixabay.com/photo/2019/10/30/08/38/zenit-4588985_960_720.jpg',
         price: 500,
         phoneNumber: '+48777888999',
-        location: 'Poland',
+        adLocation: 'Poland',
       },
       {
         id: 3,
@@ -41,7 +41,7 @@ export const initialState = {
         picture: '',
         price: '',
         phoneNumber: '+48777888999',
-        location: 'Poland / Remote',
+        adLocation: 'Poland / Remote',
       },
     ],
     loading: {
