@@ -50,7 +50,7 @@ export const initialState = {
     },
   },
   users: {
-    isLogged: true,
+    isLogged: false,
     isAdmin: false,
     user: 'jane.doe@example.com',
   },

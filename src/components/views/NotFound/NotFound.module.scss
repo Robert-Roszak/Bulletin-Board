@@ -1,4 +1,11 @@
 @import '../../../styles/settings.scss';
 
-// .root {
-// }
+.root {
+  text-align: center;
+
+  .image {
+    width: 70%;
+    //max-width: 70%;
+    height: auto;
+  }
+}

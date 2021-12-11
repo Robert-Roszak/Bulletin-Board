@@ -83,7 +83,7 @@ const Component = ({className, post, users }) => {
                 :
                 ''
             }
-            {users.isAdmin || users.user === post.authorEmail ?
+            {users.isAdmin || (users.isLogged && users.user === post.authorEmail) ?
               <Typography variant="body2">
                 <Button component={Link} to={`/post/${post.id}/edit`} color="primary" variant="contained" size="small" fullWidth startIcon={<EditRoundedIcon />}>Edit advert</Button>
               </Typography>

@@ -73,7 +73,7 @@ const Component = ({className, posts, users}) => {
                       <Typography variant="body2" gutterBottom>
                         <Button component={Link} to={`/post/${post.id}`} color="primary" variant="contained" size="small" fullWidth startIcon={<OpenInNewRoundedIcon />}>View advert</Button>
                       </Typography>
-                      {users.isAdmin || users.user === post.authorEmail ?
+                      {users.isAdmin || (users.isLogged && users.user === post.authorEmail) ?
                         <Typography variant="body2">
                           <Button component={Link} to={`/post/${post.id}/edit`} color="primary" variant="contained" size="small" fullWidth startIcon={<EditRoundedIcon />}>Edit advert</Button>
                         </Typography>
