@@ -22,8 +22,8 @@ const Component = ({className, post, users }) => {
       <Grid container spacing={3} className={styles.postContainer}>
         <Grid item xs={12} sm={4} md={4} className={styles.imageWrapper}>
           {
-            post.picture ?
-              <img className={styles.image} src={post.picture} alt='img' />
+            post.photo ?
+              <img className={styles.image} src={post.photo} alt='img' />
               :
               <img className={styles.image} src="https://kwiaciarniaegzotyka.pl/wp-content/uploads/2018/10/kisspng-video-on-demand-retail-website-simple-no-png-5ab1349e1338a3.1123358815215627820787.png" alt='no_picture' />
           }
@@ -34,7 +34,7 @@ const Component = ({className, post, users }) => {
               {post.title} {post.price ? `- $${post.price}` : ''}
             </Typography>
             <Typography variant="body1">
-              {post.content}
+              {post.text}
             </Typography>
           </Grid>
           <Grid container direction="column" className={styles.contact}>
@@ -42,25 +42,25 @@ const Component = ({className, post, users }) => {
               Contact information
             </Typography>
             {
-              post.authorEmail ?
+              post.author ?
                 <Typography variant="body1" className={styles.iconWrapper}>
-                  <EmailRoundedIcon color="info" className={styles.icon} /> email: {post.authorEmail}
+                  <EmailRoundedIcon color="info" className={styles.icon} /> email: {post.author}
                 </Typography>
                 :
                 ''
             }
             {
-              post.phoneNumber ?
+              post.phone ?
                 <Typography variant="body1" className={styles.iconWrapper}>
-                  <PhoneAndroidRoundedIcon color="info" className={styles.icon} /> phone: {post.phoneNumber}
+                  <PhoneAndroidRoundedIcon color="info" className={styles.icon} /> phone: {post.phone}
                 </Typography>
                 :
                 ''
             }
             {
-              post.adLocation ?
+              post.location ?
                 <Typography variant="body1" className={styles.iconWrapper}>
-                  <LocationCityRoundedIcon color="info" className={styles.icon} /> location: {post.adLocation}
+                  <LocationCityRoundedIcon color="info" className={styles.icon} /> location: {post.location}
                 </Typography>
                 :
                 ''
@@ -73,19 +73,19 @@ const Component = ({className, post, users }) => {
               Status: {post.status}
             </Typography>
             <Typography variant="body1">
-              Date published {post.datePublished}
+              Date published {post.created}
             </Typography>
             {
-              post.dateUpdated ?
+              post.updated ?
                 <Typography variant="body1">
-                  Date updated {post.dateUpdated}
+                  Date updated {post.updated}
                 </Typography>
                 :
                 ''
             }
-            {users.isAdmin || (users.isLogged && users.user === post.authorEmail) ?
+            {users.isAdmin || (users.isLogged && users.user === post.author) ?
               <Typography variant="body2">
-                <Button component={Link} to={`/post/${post.id}/edit`} color="primary" variant="contained" size="small" fullWidth startIcon={<EditRoundedIcon />}>Edit advert</Button>
+                <Button component={Link} to={`/post/${post._id}/edit`} color="primary" variant="contained" size="small" fullWidth startIcon={<EditRoundedIcon />}>Edit advert</Button>
               </Typography>
               :
               ''

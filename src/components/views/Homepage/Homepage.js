@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getUsers } from '../../../redux/usersRedux';
-import { getAll } from '../../../redux/postsRedux';
+import { getAllPublished, fetchPublished } from '../../../redux/postsRedux';
 
 import clsx from 'clsx';
 
@@ -40,20 +40,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Component = ({className, posts, users}) => {
+const Component = ({className, posts, users, fetchPublishedPosts}) => {
   const classes = useStyles();
+
+  useEffect(() =>{
+    fetchPublishedPosts();
+  });
 
   return (
     <div className={clsx(className, styles.root)}>
-      {posts.data.map(post => {
+      {posts.map(post => {
         return (
-          <Grid key={post.id} className={classes.root}>
+          <Grid key={post._id} className={classes.root}>
             <Paper className={classes.paper}>
               <Grid container spacing={2}>
-                {post.picture ?
+                {post.photo ?
                   <Grid item>
                     <ButtonBase className={classes.image}>
-                      <img className={classes.img} alt="img" src={post.picture} />
+                      <img className={classes.img} alt="img" src={post.photo} />
                     </ButtonBase>
                   </Grid>
                   :
@@ -66,16 +70,16 @@ const Component = ({className, posts, users}) => {
                         {post.title}
                       </Typography>
                       <Typography variant="body2" gutterBottom>
-                        {post.content}
+                        {post.text}
                       </Typography>
                     </Grid>
                     <Grid item>
                       <Typography variant="body2" gutterBottom>
-                        <Button component={Link} to={`/post/${post.id}`} color="primary" variant="contained" size="small" fullWidth startIcon={<OpenInNewRoundedIcon />}>View advert</Button>
+                        <Button component={Link} to={`/post/${post._id}`} color="primary" variant="contained" size="small" fullWidth startIcon={<OpenInNewRoundedIcon />}>View advert</Button>
                       </Typography>
-                      {users.isAdmin || (users.isLogged && users.user === post.authorEmail) ?
+                      {users.isAdmin || (users.isLogged && users.user === post.author) ?
                         <Typography variant="body2">
-                          <Button component={Link} to={`/post/${post.id}/edit`} color="primary" variant="contained" size="small" fullWidth startIcon={<EditRoundedIcon />}>Edit advert</Button>
+                          <Button component={Link} to={`/post/${post._id}/edit`} color="primary" variant="contained" size="small" fullWidth startIcon={<EditRoundedIcon />}>Edit advert</Button>
                         </Typography>
                         :
                         ''
@@ -101,20 +105,22 @@ const Component = ({className, posts, users}) => {
 
 Component.propTypes = {
   className: PropTypes.string,
-  posts: PropTypes.object,
+  posts: PropTypes.array,
   users: PropTypes.object,
+  fetchPublishedPosts: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
   users: getUsers(state),
-  posts: getAll(state),
+  posts: getAllPublished(state),
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
+const mapDispatchToProps = dispatch => ({
+  fetchPublishedPosts: () => dispatch(fetchPublished()),
+});
 
-const Container = connect(mapStateToProps, /* mapDispatchToProps */)(Component);
+const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
+
 
 export {
   //Component as Homepage,

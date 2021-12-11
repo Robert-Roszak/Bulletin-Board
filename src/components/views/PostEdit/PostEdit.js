@@ -122,7 +122,7 @@ const Component = ({className, post }) => {
               <Button color="primary" variant="contained" size="small" fullWidth startIcon={<SaveAsRoundedIcon />}>Save as draft</Button>
             </Typography>
             <Typography gutterBottom variant="body2">
-              <Button component={Link} to={`/post/${post.id}`} color="primary" variant="contained" size="small" fullWidth startIcon={<SaveRoundedIcon />}>Publish</Button>
+              <Button component={Link} to={`/post/${post._id}`} color="primary" variant="contained" size="small" fullWidth startIcon={<SaveRoundedIcon />}>Publish</Button>
             </Typography>
             <Typography variant="body2">
               <Button component={Link} to={`/`} color="primary" variant="contained" size="small" fullWidth startIcon={<DeleteForeverRoundedIcon />}>Remove advert</Button>

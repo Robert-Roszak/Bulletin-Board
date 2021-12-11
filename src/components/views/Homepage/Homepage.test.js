@@ -7,7 +7,7 @@ describe('Component Homepage', () => {
     const posts = {
       data: [],
     };
-    const component = shallow(<HomepageComponent posts={posts} />);
+    const component = shallow(<HomepageComponent posts={posts.data} />);
     expect(component).toBeTruthy();
   });
 });
