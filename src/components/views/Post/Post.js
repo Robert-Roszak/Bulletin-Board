@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import clsx from 'clsx';
 
 import { connect } from 'react-redux';
-import { getOnePost } from '../../../redux/postsRedux';
+import { getOnePost, fetchOnePostFromAPI } from '../../../redux/postsRedux';
 import { getUsers } from '../../../redux/usersRedux';
 
 import styles from './Post.module.scss';
@@ -15,10 +15,17 @@ import LocationCityRoundedIcon from '@mui/icons-material/LocationCityRounded';
 import { Link } from 'react-router-dom';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 
-const Component = ({className, post, users }) => {
+
+const Component = ({className, post, users, fetchPost }) => {
+  useEffect(() => {
+    //const { fetchPost } = this.props;
+    fetchPost();
+    console.log('useeffect');
+  });
 
   return (
     <div className={clsx(className, styles.root)}>
+      {console.log('post przed render: ', post)}
       <Grid container spacing={3} className={styles.postContainer}>
         <Grid item xs={12} sm={4} md={4} className={styles.imageWrapper}>
           {
@@ -97,23 +104,26 @@ const Component = ({className, post, users }) => {
   );
 };
 
+
 Component.propTypes = {
   className: PropTypes.string,
   match: PropTypes.any,
   post: PropTypes.object,
   users: PropTypes.object,
+  fetchPost: PropTypes.func,
 };
 
 const mapStateToProps = (state, props) => ({
   users: getUsers(state),
-  post: getOnePost(state, props.match.params.id),
+  //post: getOnePost(state, props.match.params.id),
+  post: getOnePost(state),
 });
 
-/* const mapDispatchToProps = (dispatch, props) => ({
-  fetchOnePost: () => dispatch(fetchPost(props.match.params.id)),
-}); */
+const mapDispatchToProps = (dispatch, props) => ({
+  fetchPost: () => dispatch(fetchOnePostFromAPI(props.match.params.id)),
+});
 
-const Container = connect(mapStateToProps/* , mapDispatchToProps */)(Component);
+const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
   //Component as Post,

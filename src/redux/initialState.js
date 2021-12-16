@@ -47,8 +47,8 @@ export const initialState = {
     },
   },
   users: {
-    isLogged: false,
-    isAdmin: false,
+    isLogged: true,
+    isAdmin: true,
     user: 'jane.doe@example.com',
   },
 };
