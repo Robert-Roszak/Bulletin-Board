@@ -15,93 +15,97 @@ import LocationCityRoundedIcon from '@mui/icons-material/LocationCityRounded';
 import { Link } from 'react-router-dom';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 
-
 const Component = ({className, post, users, fetchPost }) => {
   useEffect(() => {
-    //const { fetchPost } = this.props;
     fetchPost();
-    console.log('useeffect');
-  });
+  },[fetchPost]);
 
-  return (
-    <div className={clsx(className, styles.root)}>
-      {console.log('post przed render: ', post)}
-      <Grid container spacing={3} className={styles.postContainer}>
-        <Grid item xs={12} sm={4} md={4} className={styles.imageWrapper}>
-          {
-            post.photo ?
-              <img className={styles.image} src={post.photo} alt='img' />
-              :
-              <img className={styles.image} src="https://kwiaciarniaegzotyka.pl/wp-content/uploads/2018/10/kisspng-video-on-demand-retail-website-simple-no-png-5ab1349e1338a3.1123358815215627820787.png" alt='no_picture' />
-          }
-        </Grid>
-        <Grid item xs={12} sm={5} md={5} className={styles.content}>
-          <Grid container>
-            <Typography variant="h4">
-              {post.title} {post.price ? `- $${post.price}` : ''}
-            </Typography>
-            <Typography variant="body1">
-              {post.text}
-            </Typography>
-          </Grid>
-          <Grid container direction="column" className={styles.contact}>
-            <Typography variant="h6">
-              Contact information
-            </Typography>
+  if (post) {
+    return (
+      <div className={clsx(className, styles.root)}>
+        <Grid container spacing={3} className={styles.postContainer}>
+          <Grid item xs={12} sm={4} md={4} className={styles.imageWrapper}>
             {
-              post.author ?
-                <Typography variant="body1" className={styles.iconWrapper}>
-                  <EmailRoundedIcon color="info" className={styles.icon} /> email: {post.author}
-                </Typography>
+              post.photo ?
+                <img className={styles.image} src={post.photo} alt='img' />
                 :
-                ''
-            }
-            {
-              post.phone ?
-                <Typography variant="body1" className={styles.iconWrapper}>
-                  <PhoneAndroidRoundedIcon color="info" className={styles.icon} /> phone: {post.phone}
-                </Typography>
-                :
-                ''
-            }
-            {
-              post.location ?
-                <Typography variant="body1" className={styles.iconWrapper}>
-                  <LocationCityRoundedIcon color="info" className={styles.icon} /> location: {post.location}
-                </Typography>
-                :
-                ''
+                <Typography variant="h6">No picture</Typography>
             }
           </Grid>
-        </Grid>
-        <Grid container item xs={12} sm={3} md={3} className={styles.status}>
-          <Grid>
-            <Typography variant="body1">
-              Status: {post.status}
-            </Typography>
-            <Typography variant="body1">
-              Date published {post.created}
-            </Typography>
-            {
-              post.updated ?
-                <Typography variant="body1">
-                  Date updated {post.updated}
-                </Typography>
-                :
-                ''
-            }
-            {users.isAdmin || (users.isLogged && users.user === post.author) ?
-              <Typography variant="body2">
-                <Button component={Link} to={`/post/${post._id}/edit`} color="primary" variant="contained" size="small" fullWidth startIcon={<EditRoundedIcon />}>Edit advert</Button>
+          <Grid item xs={12} sm={5} md={5} className={styles.content}>
+            <Grid container>
+              <Typography variant="h4">
+                {post.title} {post.price ? `- $${post.price}` : ''}
               </Typography>
-              :
-              ''
-            }
+              <Typography variant="body1">
+                {post.text}
+              </Typography>
+            </Grid>
+            <Grid container direction="column" className={styles.contact}>
+              <Typography variant="h6">
+                Contact information
+              </Typography>
+              {
+                post.author ?
+                  <Typography variant="body1" className={styles.iconWrapper}>
+                    <EmailRoundedIcon color="info" className={styles.icon} /> email: {post.author}
+                  </Typography>
+                  :
+                  ''
+              }
+              {
+                post.phone ?
+                  <Typography variant="body1" className={styles.iconWrapper}>
+                    <PhoneAndroidRoundedIcon color="info" className={styles.icon} /> phone: {post.phone}
+                  </Typography>
+                  :
+                  ''
+              }
+              {
+                post.location ?
+                  <Typography variant="body1" className={styles.iconWrapper}>
+                    <LocationCityRoundedIcon color="info" className={styles.icon} /> location: {post.location}
+                  </Typography>
+                  :
+                  ''
+              }
+            </Grid>
+          </Grid>
+          <Grid container item xs={12} sm={3} md={3} className={styles.status}>
+            <Grid>
+              <Typography variant="body1">
+                Status: {post.status}
+              </Typography>
+              <Typography variant="body1">
+                Date published {post.created}
+              </Typography>
+              {
+                post.updated ?
+                  <Typography variant="body1">
+                    Date updated {post.updated}
+                  </Typography>
+                  :
+                  ''
+              }
+              {users.isAdmin || (users.isLogged && users.user === post.author) ?
+                <Typography variant="body2">
+                  <Button component={Link} to={`/post/${post._id}/edit`} color="primary" variant="contained" size="small" fullWidth startIcon={<EditRoundedIcon />}>Edit advert</Button>
+                </Typography>
+                :
+                ''
+              }
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    </div>
-  );
+      </div>
+    );
+  }
+  else {
+    return(
+      <h1>Loading</h1>
+    );
+  }
+
 };
 
 
@@ -115,7 +119,6 @@ Component.propTypes = {
 
 const mapStateToProps = (state, props) => ({
   users: getUsers(state),
-  //post: getOnePost(state, props.match.params.id),
   post: getOnePost(state),
 });
 

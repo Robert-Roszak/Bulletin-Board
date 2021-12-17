@@ -4,10 +4,7 @@ import Axios from 'axios';
 export const getAll = ({posts}) => posts.data;
 export const getAllPublished = ({posts}) => posts.data.filter(item => item.status === 'published');
 //export const getOnePost = ({posts}, id) => posts.data.find(post => post._id.toString() === id);
-export const getOnePost = ({posts}) => {
-  console.log('posts w reduxie: ', posts);
-  return posts.onePost;
-};
+export const getOnePost = ({posts}) => posts.onePost;
 
 /* action name creator */
 const reducerName = 'posts';
@@ -59,7 +56,6 @@ export const addPostRequest = (data) => {
 };
 
 export const fetchOnePostFromAPI = (_id) => {
-  console.log('wchodzi tu? id to: ', _id);
   return (dispatch, getState) => {
     dispatch(fetchStarted());
     Axios.get(`http://localhost:8000/api/posts/${_id}`)
